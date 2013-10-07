@@ -1,15 +1,10 @@
 <?php
 
-require_once 'Checker/SudokuChecker.php';
-
-require_once 'Sudoku/Sudoku.php';
-require_once 'Sudoku/SudokuBox.php';
-require_once 'Sudoku/SudokuColumn.php';
-require_once 'Sudoku/SudokuRow.php';
-
-require_once 'Validator/DimensionValidator.php';
-require_once 'Validator/SequenceValidator.php';
-require_once 'Validator/UniqueValidator.php';
+use Sobit\SudokuChecker\Checker\SudokuChecker;
+use Sobit\SudokuChecker\Sudoku\Sudoku;
+use Sobit\SudokuChecker\Validator\DimensionValidator;
+use Sobit\SudokuChecker\Validator\SequenceValidator;
+use Sobit\SudokuChecker\Validator\UniqueValidator;
 
 $sudokuArray = array(
     array(5, 3, 4, 6, 7, 8, 9, 1, 2),

@@ -1,7 +1,13 @@
 <?php
 
+namespace Sobit\SudokuChecker\Validator;
+
+use RuntimeException;
+
 /**
  * Class DimensionValidator
+ *
+ * @package Sobit\SudokuChecker\Validator
  */
 class DimensionValidator
 {

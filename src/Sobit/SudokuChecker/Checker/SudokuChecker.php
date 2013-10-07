@@ -1,5 +1,11 @@
 <?php
 
+namespace Sobit\SudokuChecker\Checker;
+
+use Sobit\SudokuChecker\Sudoku\Sudoku;
+use Sobit\SudokuChecker\Validator\SequenceValidator;
+use Sobit\SudokuChecker\Validator\UniqueValidator;
+
 /**
  * Class SudokuChecker
  */

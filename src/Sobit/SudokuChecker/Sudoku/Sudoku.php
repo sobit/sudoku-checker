@@ -1,5 +1,7 @@
 <?php
 
+namespace Sobit\SudokuChecker\Sudoku;
+
 /**
  * Class Sudoku
  */

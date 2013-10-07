@@ -1,7 +1,13 @@
 <?php
 
+namespace Sobit\SudokuChecker\Validator;
+
+use RuntimeException;
+
 /**
  * Class SequenceValidator
+ *
+ * @package Sobit\SudokuChecker\Validator
  */
 class SequenceValidator
 {
