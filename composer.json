@@ -1,5 +1,11 @@
 {
     "name": "sobit/sudoku-checker",
+    "authors": [
+        {
+            "name": "Sobit Akhmedov",
+            "email": "sobit.akhmedov@gmail.com"
+        }
+    ],
     "require": {
         "php": ">=5.3.0"
     }
