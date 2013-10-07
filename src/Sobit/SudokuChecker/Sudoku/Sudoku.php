@@ -2,6 +2,8 @@
 
 namespace Sobit\SudokuChecker\Sudoku;
 
+use Sobit\SudokuChecker\Validator\DimensionValidator;
+
 /**
  * Class Sudoku
  */
