@@ -25,10 +25,10 @@ class SudokuChecker
      * @param UniqueValidator $uv
      * @param SequenceValidator $sv
      */
-    public function __construct(UniqueValidator $uv, SequenceValidator $sv)
+    public function __construct(UniqueValidator $uv = null, SequenceValidator $sv = null)
     {
-        $this->uniqueValidator = $uv;
-        $this->sequenceValidator = $sv;
+        $this->uniqueValidator = (null === $uv) ? new UniqueValidator() : $uv;
+        $this->sequenceValidator = (null === $sv) ? new SequenceValidator(1) : $sv;
     }
 
     /**
