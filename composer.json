@@ -1,5 +1,6 @@
 {
     "name": "sobit/sudoku-checker",
+    "license": "MIT",
     "authors": [
         {
             "name": "Sobit Akhmedov",
