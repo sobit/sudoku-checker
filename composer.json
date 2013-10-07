@@ -1,5 +1,6 @@
 {
     "name": "sobit/sudoku-checker",
+    "description": "Sobit Sudoku Checker",
     "license": "MIT",
     "authors": [
         {
