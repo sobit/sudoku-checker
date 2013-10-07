@@ -23,12 +23,12 @@ class DimensionValidator
     {
         $isValid = true;
 
-        if ($rows !== count($array)) {
+        if (count($array) !== $rows) {
             $isValid = false;
         }
 
         foreach ($array as $row) {
-            if ($columns !== count($row)) {
+            if (count($row) !== $columns) {
                 $isValid = false;
             }
         }

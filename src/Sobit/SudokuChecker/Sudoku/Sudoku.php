@@ -2,6 +2,10 @@
 
 namespace Sobit\SudokuChecker\Sudoku;
 
+use Sobit\SudokuChecker\Factory\SudokuBoxFactory;
+use Sobit\SudokuChecker\Factory\SudokuColumnFactory;
+use Sobit\SudokuChecker\Factory\SudokuRowFactory;
+use Sobit\SudokuChecker\Helper\ArrayHelper;
 use Sobit\SudokuChecker\Validator\DimensionValidator;
 
 /**
@@ -11,21 +15,21 @@ class Sudoku
 {
 
     /**
-     * @var string
+     * @var SudokuRowFactory
      */
-    private $rowClass;
+    private $rowFactory;
     /**
-     * @var string
+     * @var SudokuColumnFactory
      */
-    private $columnClass;
+    private $columnFactory;
     /**
-     * @var string
+     * @var SudokuBoxFactory
      */
-    private $boxClass;
+    private $boxFactory;
     /**
-     * @var DimensionValidator
+     * @var ArrayHelper
      */
-    private $dimensionValidator;
+    private $arrayHelper;
     /**
      * @var SudokuRow[]
      */
@@ -41,19 +45,17 @@ class Sudoku
 
     /**
      * @param array $sudoku
-     * @param string $rowClass
-     * @param string $columnClass
-     * @param string $boxClass
-     * @param DimensionValidator $dimensionValidator
+     * @param SudokuRowFactory $srf
+     * @param SudokuColumnFactory $scf
+     * @param SudokuBoxFactory $sbf
+     * @param ArrayHelper $ah
      */
-    public function __construct(array $sudoku, $rowClass, $columnClass, $boxClass, DimensionValidator $dimensionValidator)
+    public function __construct(array $sudoku, SudokuRowFactory $srf, SudokuColumnFactory $scf, SudokuBoxFactory $sbf, ArrayHelper $ah)
     {
-        $this->rowClass = $rowClass;
-        $this->columnClass = $columnClass;
-        $this->boxClass = $boxClass;
-        $this->dimensionValidator = $dimensionValidator;
-
-        $this->dimensionValidator->validate($sudoku, 9, 9);
+        $this->rowFactory = $srf;
+        $this->columnFactory = $scf;
+        $this->boxFactory = $sbf;
+        $this->arrayHelper = $ah;
 
         $this->initRows($sudoku);
         $this->initColumns($sudoku);
@@ -65,8 +67,9 @@ class Sudoku
      */
     private function initRows(array $sudoku)
     {
-        foreach ($sudoku as $row) {
-            $this->rows[] = new $this->rowClass($row);
+        for ($i = 0; $i < 9; $i++) {
+            $extractedRow = $this->arrayHelper->extract($sudoku, $i, 0, 1, 9);
+            $this->rows[] = $this->rowFactory->build($extractedRow);
         }
     }
 
@@ -75,11 +78,9 @@ class Sudoku
      */
     private function initColumns(array $sudoku)
     {
-        array_unshift($sudoku, null);
-        $sudoku = call_user_func_array('array_map', $sudoku);
-
-        foreach ($sudoku as $column) {
-            $this->columns[] = new $this->columnClass($column);
+        for ($i = 0; $i < 9; $i++) {
+            $extractedColumn = $this->arrayHelper->extract($sudoku, 0, $i, 9, 1);
+            $this->columns[] = $this->columnFactory->build($extractedColumn);
         }
     }
 
@@ -88,17 +89,10 @@ class Sudoku
      */
     private function initBoxes(array $sudoku)
     {
-        for ($i = 0; $i < 3; $i++) {
-            $box = array_slice($sudoku, 3 * $i, 3);
-
-            for ($j = 0; $j < 3; $j++) {
-                $boxCopy = $box;
-                foreach ($boxCopy as $key => $boxRow) {
-                    $boxCopy[$key] = array_slice($boxRow, 3 * $j, 3);
-                }
-
-                $this->dimensionValidator->validate($boxCopy, 3, 3);
-                $this->boxes = new $this->boxClass($boxCopy);
+        for ($i = 0; $i < 9; $i = $i + 3) {
+            for ($j = 0; $j < 9; $j = $j + 3) {
+                $extractedBox = $this->arrayHelper->extract($sudoku, $i, $j, 3, 3);
+                $this->boxes[] = $this->boxFactory->build($extractedBox);
             }
         }
     }

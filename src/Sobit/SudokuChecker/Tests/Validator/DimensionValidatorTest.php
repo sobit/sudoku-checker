@@ -3,6 +3,7 @@
 namespace Sobit\SudokuChecker\Tests\Validator;
 
 use PHPUnit_Framework_TestCase;
+use RuntimeException;
 use Sobit\SudokuChecker\Validator\DimensionValidator;
 
 /**
@@ -23,7 +24,7 @@ class DimensionValidatorTest extends PHPUnit_Framework_TestCase
         $this->validator = new DimensionValidator();
     }
 
-    public function testWithCorrectDimensions()
+    public function testCorrectDimensions()
     {
         $array = array(
             array(1, 2, 3),
@@ -35,9 +36,9 @@ class DimensionValidatorTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \RuntimeException
+     * @expectedException RuntimeException
      */
-    public function testWithIncorrectDimensions()
+    public function testIncorrectDimensions()
     {
         $array = array(
             array(1, 2, 3),
@@ -50,7 +51,7 @@ class DimensionValidatorTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \RuntimeException
+     * @expectedException RuntimeException
      */
     public function testCorrectDimensionsWithInconsistentRows()
     {

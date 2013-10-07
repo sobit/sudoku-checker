@@ -1,6 +1,7 @@
 <?php
 
 namespace Sobit\SudokuChecker\Sudoku;
+use Sobit\SudokuChecker\Helper\ArrayHelper;
 
 /**
  * Class SudokuBox
@@ -12,13 +13,19 @@ class SudokuBox
      * @var array
      */
     private $box;
+    /**
+     * @var ArrayHelper
+     */
+    private $arrayHelper;
 
     /**
      * @param array $box
+     * @param ArrayHelper $ah
      */
-    public function __construct(array $box)
+    public function __construct(array $box, ArrayHelper $ah)
     {
         $this->box = $box;
+        $this->arrayHelper = $ah;
     }
 
     /**
@@ -26,15 +33,7 @@ class SudokuBox
      */
     public function getAs1dArray()
     {
-        $array = array();
-
-        foreach ($this->box as $row) {
-            foreach ($row as $element) {
-                $array[] = $element;
-            }
-        }
-
-        return $array;
+        return $this->arrayHelper->convertTo1d($this->box);
     }
 
     /**
