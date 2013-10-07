@@ -1,0 +1,6 @@
+{
+    "name": "sobit/sudoku-checker",
+    "require": {
+        "php": ">=5.3.0"
+    }
+}
